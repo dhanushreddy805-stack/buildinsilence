@@ -1,508 +1,1662 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Build In Silence</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@200;300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --black:#050505;
-  --black2:#0a0a0a;
-  --black3:#111;
-  --white:#f0ece4;
-  --white2:#c8c4bc;
-  --white3:#706c66;
-  --serif:'Playfair Display',Georgia,serif;
-  --sans:'DM Sans',system-ui,sans-serif;
-  --display:'Bebas Neue',sans-serif;
-}
-html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Strategic business architecture consulting. Transform raw ideas into scalable, execution-ready blueprints. Confidential, data-backed strategies for serious founders." />
+  <meta name="keywords"
+    content="business consulting, strategic architecture, founder support, business blueprints, market validation, scaling strategy, business development" />
+  <meta name="author" content="Dhanush - Build In Silence" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#050505" />
+  <link rel="canonical" href="https://buildinsilence.in" />
+  <meta property="og:image" content="https://buildinsilence.in/favicon.jpeg" />
+  <meta property="twitter:image" content="https://buildinsilence.in/favicon.jpeg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <title>Build In Silence | Strategic Business Architecture & Consulting</title>
 
-/* CURSOR */
-#cur{position:fixed;width:6px;height:6px;background:var(--white);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width 0.2s,height 0.2s}
-#cur.big{width:48px;height:48px}
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://buildinsilence.in" />
+  <meta property="og:title" content="Build In Silence | Strategic Business Architecture" />
+  <meta property="og:description"
+    content="Transform raw ideas into scalable business blueprints. Confidential, data-backed consulting for serious founders." />
+  <meta property="og:image" content="https://buildinsilence.in/favicon.jpeg" />
+  <meta property="og:site_name" content="Build In Silence" />
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;gap:2rem;padding:1.6rem clamp(1.5rem,5vw,4rem);background:rgba(5,5,5,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(240,236,228,0.06)}
-.nav-brand{font-family:var(--display);font-size:0.9rem;letter-spacing:0.35em;color:var(--white);text-decoration:none;white-space:nowrap;flex-shrink:0}
-.nav-right{display:flex;align-items:center;gap:3rem;flex-shrink:0}
-.nav-links{display:flex;gap:2.5rem;list-style:none;white-space:nowrap}
-.nav-links a{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white2);text-decoration:none;transition:color 0.2s}
-.nav-links a:hover{color:var(--white)}
-.nav-cta{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);text-decoration:none;border:1px solid rgba(240,236,228,0.2);padding:0.55rem 1.4rem;transition:border-color 0.2s,background 0.2s}
-.nav-cta:hover{border-color:var(--white);background:rgba(240,236,228,0.04)}
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://buildinsilence.in" />
+  <meta property="twitter:title" content="Build In Silence | Strategic Business Architecture" />
+  <meta property="twitter:description"
+    content="Transform raw ideas into scalable business blueprints. Confidential, data-backed consulting for serious founders." />
+  <meta property="twitter:image" content="https://buildinsilence.in/favicon.jpeg" />
 
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:clamp(1.2rem,3vw,2rem);padding:9rem clamp(1.5rem,5vw,4rem) 3rem;position:relative;overflow:hidden;border-bottom:1px solid rgba(240,236,228,0.07)}
-
-.hero-star{position:absolute;top:50%;right:6%;transform:translate(0,-50%);width:clamp(160px,24vw,360px);height:clamp(160px,24vw,360px);opacity:0;z-index:0;pointer-events:none;animation:starIn 1.4s 0.8s cubic-bezier(0.16,1,0.3,1) forwards}
-@keyframes starIn{from{opacity:0;transform:translate(0,-50%) rotate(-20deg) scale(0.75)}to{opacity:0.85;transform:translate(0,-50%) rotate(0deg) scale(1)}}
-.star-g{animation:spinSlow 25s linear infinite;transform-origin:center}
-@keyframes spinSlow{to{transform:rotate(360deg)}}
-
-.hero-eyebrow{position:relative;z-index:2;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--white3);opacity:0;animation:fadeUp 0.8s 0.3s forwards}
-
-.hero-h1{font-family:var(--display);font-size:clamp(3.5rem,11vw,9rem);font-weight:400;line-height:0.95;letter-spacing:0.04em;opacity:0;animation:fadeUp 1s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;position:relative;z-index:2}
-.hero-h1 .stroke{-webkit-text-stroke:1.5px var(--white);color:transparent}
-
-.hero-tagline-big{font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.6rem);font-style:italic;font-weight:300;color:var(--white2);position:relative;z-index:2;opacity:0;animation:fadeUp 1s 0.7s cubic-bezier(0.16,1,0.3,1) forwards}
-
-.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-top:1.5rem;opacity:0;animation:fadeUp 0.9s 0.9s forwards;position:relative;z-index:2}
-.hero-desc{font-size:0.92rem;color:var(--white2);max-width:40ch;line-height:1.85;font-weight:300}
-.hero-col-r{display:flex;flex-direction:column;align-items:flex-end;gap:0.35rem;text-align:right}
-.hero-col-r span{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--white3)}
-
-.hero-actions{display:flex;align-items:center;gap:1.5rem;margin-top:1.8rem;flex-wrap:wrap}
-.btn-w{display:inline-flex;align-items:center;gap:0.6rem;background:var(--white);color:var(--black);padding:0.85rem 2rem;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;text-decoration:none;transition:background 0.2s}
-.btn-w:hover{background:var(--white2)}
-.btn-ghost{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white2);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:color 0.2s}
-.btn-ghost::after{content:'→';transition:transform 0.2s}
-.btn-ghost:hover{color:var(--white)}
-.btn-ghost:hover::after{transform:translateX(4px)}
-
-.ticker-bar{border-top:1px solid rgba(240,236,228,0.07);padding:1.3rem 0;overflow:hidden;position:relative;z-index:2}
-.ticker-inner{display:flex;gap:3rem;white-space:nowrap;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--white3);animation:tickScroll 24s linear infinite}
-.ticker-inner b{color:var(--white);font-weight:400}
-@keyframes tickScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-
-/* SECTION */
-section{padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,4rem)}
-.sl{font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--white3);display:flex;align-items:center;gap:1rem;margin-bottom:4rem}
-.sl i{display:block;width:2rem;height:1px;background:currentColor}
-
-/* MANIFESTO */
-.manifesto{background:var(--black2);border-top:1px solid rgba(240,236,228,0.06);border-bottom:1px solid rgba(240,236,228,0.06);padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,4rem);display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:center}
-.mf-left{display:flex;flex-direction:column;gap:3rem}
-.mf-num{font-family:var(--serif);font-size:3.2rem;font-weight:300;line-height:1}
-.mf-lbl{font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--white3);margin-top:0.4rem}
-.mf-big{font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;line-height:1.25;margin-bottom:1.8rem}
-.mf-big em{font-style:italic}
-.mf-p{font-size:0.88rem;color:var(--white3);line-height:1.95;margin-bottom:1.1rem;max-width:54ch}
-.mf-p strong{color:var(--white2);font-weight:400}
-
-/* FOUNDER */
-.founder{border-bottom:1px solid rgba(240,236,228,0.06)}
-.founder-grid{display:grid;grid-template-columns:180px 1fr;gap:5rem;align-items:start}
-.f-left{display:flex;flex-direction:column;align-items:center;position:sticky;top:8rem}
-.f-avatar{width:72px;height:72px;border-radius:50%;border:1px solid rgba(240,236,228,0.1);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--white);margin-bottom:1rem}
-.f-name{font-size:0.82rem;font-weight:500;letter-spacing:0.06em;color:var(--white);text-align:center}
-.f-role{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--white3);text-align:center;margin-top:0.3rem}
-.f-h2{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:300;line-height:1;letter-spacing:-0.02em;margin-bottom:2.5rem}
-.f-h2 em{font-style:italic}
-.f-p{font-size:0.9rem;color:var(--white3);line-height:1.95;margin-bottom:1.3rem;max-width:56ch}
-.f-p strong{color:var(--white);font-weight:400}
-.f-line{width:3rem;height:1px;background:rgba(240,236,228,0.12);margin:2.5rem 0}
-.pills{display:flex;flex-wrap:wrap;gap:0.5rem}
-.pill{font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(240,236,228,0.1);padding:0.4rem 0.9rem;color:var(--white3)}
-
-/* SERVICES */
-.services{border-bottom:1px solid rgba(240,236,228,0.06)}
-.svc-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:5rem}
-.svc-h2{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:-0.02em}
-.svc-h2 em{font-style:italic}
-.svc-sub{color:var(--white3);font-size:0.88rem;max-width:38ch;line-height:1.8}
-.svc-list{display:flex;flex-direction:column}
-.svc-row{display:grid;grid-template-columns:3.5rem 1fr 1.5rem;gap:2rem;align-items:start;padding:2.5rem 0;border-top:1px solid rgba(240,236,228,0.06);transition:padding-left 0.3s}
-.svc-row:hover{padding-left:0.5rem}
-.svc-row:hover .svc-arrow{opacity:1;transform:none}
-.svc-n{font-family:var(--display);font-size:1rem;letter-spacing:0.1em;color:var(--white3);padding-top:0.3rem}
-.svc-name{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:300;margin-bottom:0.7rem;line-height:1.1}
-.svc-desc{font-size:0.82rem;color:var(--white3);line-height:1.85;max-width:52ch}
-.svc-tags{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1.1rem}
-.stag{font-size:0.56rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(240,236,228,0.08);padding:0.3rem 0.75rem;color:var(--white3)}
-.svc-arrow{font-size:1.1rem;color:var(--white3);opacity:0;transform:translateX(-6px);transition:opacity 0.2s,transform 0.2s;padding-top:0.4rem}
-
-/* CLIENTS */
-.clients{background:var(--black2);border-bottom:1px solid rgba(240,236,228,0.06);text-align:center}
-.cl-sub{font-family:var(--serif);font-style:italic;font-size:clamp(1.2rem,2.5vw,2rem);font-weight:300;color:var(--white3);margin-bottom:5rem}
-.cl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(240,236,228,0.06);max-width:860px;margin:0 auto}
-.cl-cell{background:var(--black2);padding:2.5rem 1rem;display:flex;flex-direction:column;align-items:center;gap:0.75rem;transition:background 0.2s}
-.cl-cell:hover{background:var(--black3)}
-.cl-ini{font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--white);width:50px;height:50px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(240,236,228,0.1)}
-.cl-name{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3)}
-
-/* WHY */
-.why{border-bottom:1px solid rgba(240,236,228,0.06)}
-.why-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:5rem;align-items:end}
-.why-h2{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1.05}
-.why-h2 em{font-style:italic}
-.why-sub{color:var(--white3);font-size:0.88rem;max-width:38ch;line-height:1.8}
-.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(240,236,228,0.06)}
-.wc{background:var(--black);padding:3rem 2.5rem;border-left:2px solid transparent;transition:border-color 0.3s,background 0.2s}
-.wc:hover{border-left-color:var(--white);background:var(--black2)}
-.wc-n{font-family:var(--display);font-size:0.8rem;letter-spacing:0.2em;color:var(--white3);margin-bottom:2rem}
-.wc-t{font-family:var(--serif);font-size:1.35rem;font-weight:300;margin-bottom:0.8rem;line-height:1.2}
-.wc-d{font-size:0.82rem;color:var(--white3);line-height:1.8}
-
-/* PROCESS */
-.process{background:var(--black2);border-bottom:1px solid rgba(240,236,228,0.06)}
-.proc-head{margin-bottom:5rem}
-.proc-h2{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1.05;max-width:18ch}
-.proc-h2 em{font-style:italic}
-.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(240,236,228,0.06)}
-.ps{background:var(--black2);padding:2.5rem 2rem;position:relative;overflow:hidden}
-.ps::before{content:attr(data-n);position:absolute;bottom:-1.5rem;right:0.5rem;font-family:var(--display);font-size:7rem;color:rgba(240,236,228,0.03);line-height:1;pointer-events:none}
-.ps-n{font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--white3);margin-bottom:1.5rem}
-.ps-t{font-family:var(--serif);font-size:1.1rem;font-weight:300;margin-bottom:0.8rem;line-height:1.3}
-.ps-d{font-size:0.8rem;color:var(--white3);line-height:1.8}
-
-/* CTA SECTION */
-.cta-sec{min-height:55vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(240,236,228,0.06);padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,4rem)}
-.cta-sec::before{content:'';position:absolute;inset:0;background:linear-gradient(rgba(240,236,228,0.012) 1px,transparent 1px),linear-gradient(90deg,rgba(240,236,228,0.012) 1px,transparent 1px);background-size:60px 60px}
-.cta-star2{width:70px;height:70px;margin-bottom:3rem;opacity:0.5;position:relative;z-index:1}
-.cta-h2{font-family:var(--serif);font-size:clamp(3rem,8vw,7.5rem);font-weight:300;line-height:0.92;letter-spacing:-0.02em;margin-bottom:2rem;position:relative;z-index:1}
-.cta-h2 em{font-style:italic}
-.cta-body{font-size:0.9rem;color:var(--white3);max-width:42ch;margin:0 auto 2.5rem;line-height:1.85;position:relative;z-index:1}
-.cta-list{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:2rem;margin-bottom:3rem;position:relative;z-index:1}
-.cta-list li{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);display:flex;align-items:center;gap:0.6rem}
-.cta-list li::before{content:'✦';font-size:0.42rem;color:var(--white)}
-.cta-btns{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;position:relative;z-index:1}
-
-/* CONTACT */
-.contact{border-bottom:1px solid rgba(240,236,228,0.06)}
-.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:6rem;align-items:start}
-.ct-h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.2rem}
-.ct-h2 em{font-style:italic}
-.ct-p{font-size:0.88rem;color:var(--white3);max-width:32ch;line-height:1.8;margin-bottom:2rem}
-.ct-details{display:flex;flex-direction:column;gap:0.9rem;margin-top:2rem}
-.ctd{display:flex;gap:1.5rem;align-items:center;font-size:0.72rem}
-.ctd-l{color:var(--white3);min-width:5rem;letter-spacing:0.1em;text-transform:uppercase;font-size:0.58rem}
-.ctd-v{color:var(--white2)}
-.ct-note{margin-top:2rem;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);display:flex;align-items:center;gap:0.6rem}
-
-.form{display:flex;flex-direction:column;gap:1.8rem}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem}
-.ff{display:flex;flex-direction:column;gap:0.5rem}
-.ff label{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white3)}
-.ff input,.ff textarea{background:transparent;border:none;border-bottom:1px solid rgba(240,236,228,0.1);padding:0.7rem 0;color:var(--white);font-family:var(--sans);font-size:0.9rem;font-weight:300;outline:none;width:100%;transition:border-color 0.25s}
-.ff input::placeholder,.ff textarea::placeholder{color:rgba(240,236,228,0.15)}
-.ff input:focus,.ff textarea:focus{border-color:rgba(240,236,228,0.45)}
-.ff textarea{resize:none;min-height:130px}
-.fsub{background:transparent;border:1px solid rgba(240,236,228,0.18);color:var(--white);padding:1rem 2.5rem;font-family:var(--sans);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;align-self:flex-start;transition:border-color 0.2s,background 0.2s}
-.fsub:hover{border-color:var(--white);background:rgba(240,236,228,0.04)}
-
-/* FOOTER */
-footer{padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(240,236,228,0.06)}
-.ft-b{font-family:var(--display);font-size:0.85rem;letter-spacing:0.3em;color:var(--white2)}
-.ft-nav{display:flex;gap:2.5rem}
-.ft-nav a{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);text-decoration:none;transition:color 0.2s}
-.ft-nav a:hover{color:var(--white)}
-.ft-c{font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3)}
-
-/* REVEAL */
-.r{opacity:0;transform:translateY(30px);transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}
-.r.v{opacity:1;transform:none}
-.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
-
-/* RESPONSIVE */
-@media(max-width:960px){
-  .manifesto,.founder-grid,.svc-header,.why-head,.why-grid,.proc-grid,.contact-grid{grid-template-columns:1fr}
-  .proc-grid{grid-template-columns:1fr 1fr}
-  .cl-grid{grid-template-columns:repeat(2,1fr)}
-  .frow{grid-template-columns:1fr}
-  .hero-star{right:-3%;opacity:0.25}
-  .hero-col-r{display:none}
-  .svc-header{gap:2rem}
-}
-@media(max-width:880px){
-  .nav-links{display:none}
-  .nav-brand{font-size:0.78rem;letter-spacing:0.22em}
-}
-@media(max-width:600px){
-  body{cursor:auto}
-  #cur{display:none}
-  .proc-grid{grid-template-columns:1fr}
-  .hero-star{display:none}
-  .mf-left{flex-direction:row;flex-wrap:wrap;gap:2rem}
-}
-</style>
-</head>
-<body>
-
-<div id="cur"></div>
-
-<!-- NAV -->
-<nav>
-  <a class="nav-brand" href="#">BUILD IN SILENCE</a>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#clients">Clients</a></li>
-    </ul>
-    <a href="#contact" class="nav-cta">Get Started</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="home">
-
-  <!-- 4-point star (like in The SORN) -->
-  <div class="hero-star" aria-hidden="true">
-    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-      <g class="star-g">
-        <path d="M200 8 C197 8 194 80 194 200 C194 200 197 320 200 392 C203 320 206 200 206 200 C206 80 203 8 200 8Z" fill="white"/>
-        <path d="M8 200 C8 197 80 194 200 194 C200 194 320 197 392 200 C320 203 200 206 200 206 C80 206 8 203 8 200Z" fill="white"/>
-      </g>
-      <circle cx="200" cy="200" r="4" fill="white" opacity="0.4"/>
-    </svg>
-  </div>
-
-  <p class="hero-eyebrow">Strategic Business Architecture · Est. 2024</p>
-
-  <h1 class="hero-h1">BUILD IN<br><span class="stroke">SILENCE</span></h1>
-  <p class="hero-tagline-big"><em>Building Empires. Quietly.</em></p>
-
-  <div class="hero-bottom">
-    <div>
-      <p class="hero-desc">We turn raw ideas into scalable business blueprints. Every move is calculated. Every idea is validated. We don't build noise — we build systems.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-w">Get Started ↗</a>
-        <a href="#contact" class="btn-ghost">Book a Strategy Call</a>
-      </div>
-    </div>
-    <div class="hero-col-r">
-      <span>Strategy</span>
-      <span>Blueprint</span>
-      <span>Execution</span>
-      <span>Confidential</span>
-      <span>Elite</span>
-    </div>
-  </div>
-
-  <div class="ticker-bar">
-    <div class="ticker-inner">
-      <span>Strategy</span>&ensp;✦&ensp;<span>Blueprint</span>&ensp;✦&ensp;<span>Execution</span>&ensp;✦&ensp;<b>Silence is Strategy</b>&ensp;✦&ensp;<span>Confidential</span>&ensp;✦&ensp;<span>Elite</span>&ensp;✦&ensp;<span>Validated</span>&ensp;✦&ensp;<span>Scalable</span>&ensp;✦&ensp;<span>Strategy</span>&ensp;✦&ensp;<span>Blueprint</span>&ensp;✦&ensp;<span>Execution</span>&ensp;✦&ensp;<b>Silence is Strategy</b>&ensp;✦&ensp;<span>Confidential</span>&ensp;✦&ensp;<span>Elite</span>&ensp;✦&ensp;<span>Validated</span>&ensp;✦&ensp;<span>Scalable</span>&ensp;✦&ensp;
-    </div>
-  </div>
-</section>
-
-<!-- MANIFESTO -->
-<div class="manifesto r">
-  <div class="mf-left">
-    <div><div class="mf-num">100%</div><div class="mf-lbl">Confidential</div></div>
-    <div><div class="mf-num">3×</div><div class="mf-lbl">Avg. growth potential</div></div>
-    <div><div class="mf-num">NDA</div><div class="mf-lbl">Every engagement</div></div>
-  </div>
-  <div>
-    <p class="mf-big r d1"><em>BUILD IN SILENCE</em> is not just a consulting firm.</p>
-    <p class="mf-p r d2">We <strong>architect business ideas</strong> and convert them into structured, execution-ready blueprints designed for scalable growth.</p>
-    <p class="mf-p r d3">Every move is <strong>calculated</strong>. Every idea is <strong>validated</strong>. Every strategy is built for the long game — not the spotlight.</p>
-    <p class="mf-p r d3">We don't build noise. <strong>We build systems.</strong></p>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="founder" id="about">
-  <div class="sl"><i></i> About the Architect</div>
-  <div class="founder-grid">
-    <div class="f-left r">
-      <div class="f-avatar">D</div>
-      <div class="f-name">Dhanush</div>
-      <div class="f-role">Founder &amp; Strategic Architect</div>
-    </div>
-    <div>
-      <h2 class="f-h2 r">The <em>mind</em> behind the blueprint.</h2>
-      <p class="f-p r d1">BUILD IN SILENCE was founded on a singular belief: that the most powerful businesses are built in the quiet — through disciplined thinking, precise strategy, and ruthless execution. Not through noise.</p>
-      <p class="f-p r d2">With a background in business architecture and market strategy, Dhanush has helped founders across industries turn vague ambitions into <strong>structured, fundable, scalable realities</strong>.</p>
-      <p class="f-p r d3">Every engagement is personal. Every blueprint is bespoke. <strong>Your idea deserves more than a template.</strong></p>
-      <div class="f-line"></div>
-      <div class="pills r d3">
-        <span class="pill">Market Validation</span>
-        <span class="pill">Business Architecture</span>
-        <span class="pill">Scaling Strategy</span>
-        <span class="pill">Monetisation</span>
-        <span class="pill">NDA Protected</span>
-        <span class="pill">Elite Positioning</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="sl"><i></i> What We Do</div>
-  <div class="svc-header">
-    <h2 class="svc-h2 r">Three pillars. One <em>outcome.</em></h2>
-    <p class="svc-sub r d1">We don't offer generic consulting packages. We engineer bespoke strategic systems for founders who refuse to settle for average.</p>
-  </div>
-  <div class="svc-list">
-    <div class="svc-row r">
-      <div class="svc-n">01</div>
-      <div>
-        <div class="svc-name">Business Idea Development</div>
-        <p class="svc-desc">From raw concept to validated opportunity. We interrogate your idea, stress-test the market, and uncover the clearest path to monetisation. No guesswork — only evidence-backed conviction that gives you the confidence to build.</p>
-        <div class="svc-tags">
-          <span class="stag">Market Validation</span><span class="stag">Opportunity Research</span><span class="stag">Monetisation Strategy</span><span class="stag">Competitive Positioning</span>
-        </div>
-      </div>
-      <div class="svc-arrow">→</div>
-    </div>
-    <div class="svc-row r d1">
-      <div class="svc-n">02</div>
-      <div>
-        <div class="svc-name">Blueprint Architecture</div>
-        <p class="svc-desc">The blueprint is your business's nervous system. We design revenue structures, execution roadmaps, and scaling frameworks that hold up under pressure — and under investor scrutiny. Built to last. Built to scale.</p>
-        <div class="svc-tags">
-          <span class="stag">Business Model Structuring</span><span class="stag">Revenue Systems</span><span class="stag">Execution Roadmap</span><span class="stag">Scaling Framework</span>
-        </div>
-      </div>
-      <div class="svc-arrow">→</div>
-    </div>
-    <div class="svc-row r d2">
-      <div class="svc-n">03</div>
-      <div>
-        <div class="svc-name">Personal Branding</div>
-        <p class="svc-desc">The founder is the brand. We craft your public narrative, authority positioning, and digital presence — ensuring the world sees the architect behind the empire. Your name should open doors before you enter the room.</p>
-        <div class="svc-tags">
-          <span class="stag">Founder Narrative</span><span class="stag">Authority Positioning</span><span class="stag">Digital Presence</span><span class="stag">LinkedIn Strategy</span><span class="stag">Content Architecture</span>
-        </div>
-      </div>
-      <div class="svc-arrow">→</div>
-    </div>
-  </div>
-</section>
-
-<!-- CLIENTS -->
-<section class="clients" id="clients">
-  <div class="sl" style="justify-content:center"><i></i> Clients <i></i></div>
-  <p class="cl-sub r">Trusted by Visionary Brands</p>
-  <div class="cl-grid r d1">
-    <div class="cl-cell"><div class="cl-ini">SC</div><div class="cl-name">Scaler</div></div>
-    <div class="cl-cell"><div class="cl-ini">PL</div><div class="cl-name">Polaris</div></div>
-    <div class="cl-cell"><div class="cl-ini">MK</div><div class="cl-name">Matiks</div></div>
-    <div class="cl-cell"><div class="cl-ini">SA</div><div class="cl-name">Sahaa</div></div>
-  </div>
-</section>
-
-<!-- WHY -->
-<section class="why" id="why">
-  <div class="sl"><i></i> Why Choose Us</div>
-  <div class="why-head">
-    <h2 class="why-h2 r">The competitive edge for <em>serious</em> founders.</h2>
-    <p class="why-sub r d1">Most consultants give you a deck. We give you a deployment-ready system — built for scale, engineered for longevity.</p>
-  </div>
-  <div class="why-grid">
-    <div class="wc r"><div class="wc-n">01 ──</div><div class="wc-t">Confidential Approach</div><p class="wc-d">Your ideas remain protected. We operate with absolute discretion, signed NDAs on every engagement, and a zero-disclosure policy. Your vision never leaves the room.</p></div>
-    <div class="wc r d1"><div class="wc-n">02 ──</div><div class="wc-t">Data-Backed Strategy</div><p class="wc-d">Every decision is validated through market research, competitive intelligence, and proven strategic frameworks — not gut feel. We build on evidence, not assumption.</p></div>
-    <div class="wc r d2"><div class="wc-n">03 ──</div><div class="wc-t">Elite-Level Positioning</div><p class="wc-d">We don't build generic solutions. We craft bespoke, premium strategies for founders with the ambition to lead markets — not follow them.</p></div>
-    <div class="wc r d3"><div class="wc-n">04 ──</div><div class="wc-t">Long-Term Vision</div><p class="wc-d">We focus on sustainable, compounding growth — not vanity metrics or quick wins. Built for scale. Engineered to outlast the noise and outperform the competition.</p></div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="process">
-  <div class="sl"><i></i> How We Work</div>
-  <div class="proc-head">
-    <h2 class="proc-h2 r">No surprises. <em>Just results.</em></h2>
-  </div>
-  <div class="proc-grid">
-    <div class="ps r" data-n="1"><div class="ps-n">01 — Discovery</div><div class="ps-t">We listen before we strategise</div><p class="ps-d">Deep-dive into your business model, ambitions, market, and constraints. Everything begins with understanding the full picture.</p></div>
-    <div class="ps r d1" data-n="2"><div class="ps-n">02 — Validation</div><div class="ps-t">Every idea is stress-tested</div><p class="ps-d">We run your idea through market research, competitive analysis, and financial viability modelling before a single strategy is built.</p></div>
-    <div class="ps r d2" data-n="3"><div class="ps-n">03 — Blueprint</div><div class="ps-t">Architecture before execution</div><p class="ps-d">We build your complete business blueprint — revenue model, go-to-market strategy, scaling levers, and a sequenced execution roadmap.</p></div>
-    <div class="ps r d3" data-n="4"><div class="ps-n">04 — Deployment</div><div class="ps-t">Handed over. Ready to build.</div><p class="ps-d">You receive a fully execution-ready strategic package. We remain available for ongoing advisory as you scale into your market.</p></div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-sec">
-  <div class="cta-star2 r" aria-hidden="true">
-    <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
-      <path d="M35 2 C33 2 31 25 31 35 C31 45 33 68 35 68 C37 68 39 45 39 35 C39 25 37 2 35 2Z" fill="white"/>
-      <path d="M2 35 C2 33 25 31 35 31 C45 31 68 33 68 35 C68 37 45 39 35 39 C25 39 2 37 2 35Z" fill="white"/>
-      <circle cx="35" cy="35" r="2.5" fill="white" opacity="0.5"/>
-    </svg>
-  </div>
-  <h2 class="cta-h2 r">Build It. But <em>Build It Right.</em></h2>
-  <p class="cta-body r d1">Serious founders only. If you're ready to move from idea to empire — the blueprint starts here.</p>
-  <ul class="cta-list r d2">
-    <li>Serious founders only</li>
-    <li>Confidential consultation</li>
-    <li>Strategic business blueprints</li>
-    <li>Execution-ready frameworks</li>
-  </ul>
-  <div class="cta-btns r d3">
-    <a href="#contact" class="btn-w">Start Your Strategy Session ↗</a>
-    <a href="#contact" class="btn-ghost">Book a Call</a>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-grid">
-    <div>
-      <div class="sl"><i></i> Get In Touch</div>
-      <h2 class="ct-h2 r"><em>Let's architect</em> your empire.</h2>
-      <p class="ct-p r d1">Every great business begins with a single, well-structured conversation. All submissions are treated with absolute confidentiality.</p>
-      <div class="ct-details r d2">
-        <div class="ctd"><span class="ctd-l">Email</span><span class="ctd-v">hello@buildinsilence.co</span></div>
-        <div class="ctd"><span class="ctd-l">Based</span><span class="ctd-v">India — Working Globally</span></div>
-        <div class="ctd"><span class="ctd-l">Response</span><span class="ctd-v">Within 24 hours</span></div>
-      </div>
-      <div class="ct-note r d3">🔒 NDA signed before every engagement</div>
-    </div>
-    <div class="r d1">
-      <div class="form">
-        <div class="frow">
-          <div class="ff"><label for="fn">Full Name *</label><input id="fn" type="text" placeholder="Your name"/></div>
-          <div class="ff"><label for="fe">Email Address *</label><input id="fe" type="email" placeholder="your@email.com"/></div>
-        </div>
-        <div class="ff"><label for="fc">Company / Project Name</label><input id="fc" type="text" placeholder="What are you building?"/></div>
-        <div class="ff"><label for="fi">Tell us about your idea *</label><textarea id="fi" placeholder="Share your vision. The more detail, the better. All information is kept strictly confidential."></textarea></div>
-        <button class="fsub" onclick="doSend()">Send Message</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span class="ft-b">BUILD IN SILENCE</span>
-  <nav class="ft-nav">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#clients">Clients</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <span class="ft-c">© 2025 Build In Silence · All Rights Reserved</span>
-</footer>
-
-<script>
-// Cursor
-const cur=document.getElementById('cur');
-document.addEventListener('mousemove',e=>{
-  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
-});
-document.querySelectorAll('a,button,.svc-row,.wc,.cl-cell').forEach(el=>{
-  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
-  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
-});
-
-// Scroll reveal
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')});
-},{threshold:0.07});
-document.querySelectorAll('.r').forEach(el=>obs.observe(el));
-
-// Form
-function doSend(){
-  const n=document.getElementById('fn').value.trim();
-  const e=document.getElementById('fe').value.trim();
-  const i=document.getElementById('fi').value.trim();
-  const b=document.querySelector('.fsub');
-  if(!n||!e||!i){
-    b.textContent='Please fill required fields';
-    setTimeout(()=>b.textContent='Send Message',2500);return;
-  }
-  b.textContent='Message Sent ✦';
-  b.style.background='rgba(240,236,228,0.06)';b.disabled=true;
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Build In Silence",
+  "description": "Strategic business architecture and consulting firm specializing in business blueprints and founder support",
+  "url": "https://buildinsilence.in",
+  "logo": "https://buildinsilence.in/favicon.jpeg",
+  "image": "https://buildinsilence.in/favicon.jpeg",
+  "telephone": "+91 70194 21089",
+  "email": "dhanush@buildinsilence.in",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN",
+    "addressLocality": "India"
+  },
+  "areaServed": "Worldwide",
+  "priceRange": "$$",
+  "founder": {
+    "@type": "Person",
+    "name": "Dhanush",
+    "jobTitle": "Founder & Strategic Architect"
+  },
+  "knowsAbout": ["Business Architecture", "Strategic Planning", "Market Validation", "Business Scaling", "Founder Coaching"]
 }
 </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@200;300;400;500&family=Bebas+Neue&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --black: #050505;
+      --black2: #0a0a0a;
+      --black3: #111;
+      --white: #f0ece4;
+      --white2: #c8c4bc;
+      --white3: #706c66;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --display: 'Bebas Neue', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none
+    }
+
+    /* CURSOR */
+    #cur {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: var(--white);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      transition: width 0.2s, height 0.2s
+    }
+
+    #cur.big {
+      width: 48px;
+      height: 48px
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 1.6rem clamp(1.5rem, 5vw, 4rem);
+      background: rgba(5, 5, 5, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(240, 236, 228, 0.06)
+    }
+
+    .nav-brand {
+      font-family: var(--display);
+      font-size: 0.9rem;
+      letter-spacing: 0.35em;
+      color: var(--white);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-shrink: 0
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      white-space: nowrap
+    }
+
+    .nav-links a {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white2);
+      text-decoration: none;
+      transition: color 0.2s
+    }
+
+    .nav-links a:hover {
+      color: var(--white)
+    }
+
+    .nav-cta {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      border: 1px solid rgba(240, 236, 228, 0.2);
+      padding: 0.55rem 1.4rem;
+      transition: border-color 0.2s, background 0.2s
+    }
+
+    .nav-cta:hover {
+      border-color: var(--white);
+      background: rgba(240, 236, 228, 0.04)
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(1.2rem, 3vw, 2rem);
+      padding: 9rem clamp(1.5rem, 5vw, 4rem) 3rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(240, 236, 228, 0.07)
+    }
+
+    .hero-star {
+      position: absolute;
+      top: 50%;
+      right: 6%;
+      transform: translate(0, -50%);
+      width: clamp(160px, 24vw, 360px);
+      height: clamp(160px, 24vw, 360px);
+      opacity: 0;
+      z-index: 0;
+      pointer-events: none;
+      animation: starIn 1.4s 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards
+    }
+
+    @keyframes starIn {
+      from {
+        opacity: 0;
+        transform: translate(0, -50%) rotate(-20deg) scale(0.75)
+      }
+
+      to {
+        opacity: 0.85;
+        transform: translate(0, -50%) rotate(0deg) scale(1)
+      }
+    }
+
+    .star-g {
+      animation: spinSlow 25s linear infinite;
+      transform-origin: center
+    }
+
+    @keyframes spinSlow {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .hero-eyebrow {
+      position: relative;
+      z-index: 2;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--white3);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards
+    }
+
+    .hero-h1 {
+      font-family: var(--display);
+      font-size: clamp(3.5rem, 11vw, 9rem);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      position: relative;
+      z-index: 2
+    }
+
+    .hero-h1 .stroke {
+      -webkit-text-stroke: 1.5px var(--white);
+      color: transparent
+    }
+
+    .hero-tagline-big {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--white2);
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeUp 1s 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s forwards;
+      position: relative;
+      z-index: 2
+    }
+
+    .hero-desc {
+      font-size: 0.92rem;
+      color: var(--white2);
+      max-width: 40ch;
+      line-height: 1.85;
+      font-weight: 300
+    }
+
+    .hero-col-r {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.35rem;
+      text-align: right
+    }
+
+    .hero-col-r span {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--white3)
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 1.8rem;
+      flex-wrap: wrap
+    }
+
+    .btn-w {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--white);
+      color: var(--black);
+      padding: 0.85rem 2rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s
+    }
+
+    .btn-w:hover {
+      background: var(--white2)
+    }
+
+    .btn-ghost {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white2);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s
+    }
+
+    .btn-ghost::after {
+      content: '→';
+      transition: transform 0.2s
+    }
+
+    .btn-ghost:hover {
+      color: var(--white)
+    }
+
+    .btn-ghost:hover::after {
+      transform: translateX(4px)
+    }
+
+    .ticker-bar {
+      border-top: 1px solid rgba(240, 236, 228, 0.07);
+      padding: 1.3rem 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 2
+    }
+
+    .ticker-inner {
+      display: flex;
+      gap: 3rem;
+      white-space: nowrap;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--white3);
+      animation: tickScroll 24s linear infinite
+    }
+
+    .ticker-inner b {
+      color: var(--white);
+      font-weight: 400
+    }
+
+    @keyframes tickScroll {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    /* SECTION */
+    section {
+      padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem)
+    }
+
+    .sl {
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--white3);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 4rem
+    }
+
+    .sl i {
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: currentColor
+    }
+
+    /* MANIFESTO */
+    .manifesto {
+      background: var(--black2);
+      border-top: 1px solid rgba(240, 236, 228, 0.06);
+      border-bottom: 1px solid rgba(240, 236, 228, 0.06);
+      padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 5rem;
+      align-items: center
+    }
+
+    .mf-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem
+    }
+
+    .mf-num {
+      font-family: var(--serif);
+      font-size: 3.2rem;
+      font-weight: 300;
+      line-height: 1
+    }
+
+    .mf-lbl {
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--white3);
+      margin-top: 0.4rem
+    }
+
+    .mf-big {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.25;
+      margin-bottom: 1.8rem
+    }
+
+    .mf-big em {
+      font-style: italic
+    }
+
+    .mf-p {
+      font-size: 0.88rem;
+      color: var(--white3);
+      line-height: 1.95;
+      margin-bottom: 1.1rem;
+      max-width: 54ch
+    }
+
+    .mf-p strong {
+      color: var(--white2);
+      font-weight: 400
+    }
+
+    /* FOUNDER */
+    .founder {
+      border-bottom: 1px solid rgba(240, 236, 228, 0.06)
+    }
+
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 5rem;
+      align-items: start
+    }
+
+    .f-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: sticky;
+      top: 8rem
+    }
+
+    .f-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 1px solid rgba(240, 236, 228, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 1rem
+    }
+
+    .f-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      text-align: center
+    }
+
+    .f-role {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white3);
+      text-align: center;
+      margin-top: 0.3rem
+    }
+
+    .f-h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem
+    }
+
+    .f-h2 em {
+      font-style: italic
+    }
+
+    .f-p {
+      font-size: 0.9rem;
+      color: var(--white3);
+      line-height: 1.95;
+      margin-bottom: 1.3rem;
+      max-width: 56ch
+    }
+
+    .f-p strong {
+      color: var(--white);
+      font-weight: 400
+    }
+
+    .f-line {
+      width: 3rem;
+      height: 1px;
+      background: rgba(240, 236, 228, 0.12);
+      margin: 2.5rem 0
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem
+    }
+
+    .pill {
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(240, 236, 228, 0.1);
+      padding: 0.4rem 0.9rem;
+      color: var(--white3)
+    }
+
+    /* SERVICES */
+    .services {
+      border-bottom: 1px solid rgba(240, 236, 228, 0.06)
+    }
+
+    .svc-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 5rem
+    }
+
+    .svc-h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em
+    }
+
+    .svc-h2 em {
+      font-style: italic
+    }
+
+    .svc-sub {
+      color: var(--white3);
+      font-size: 0.88rem;
+      max-width: 38ch;
+      line-height: 1.8
+    }
+
+    .svc-list {
+      display: flex;
+      flex-direction: column
+    }
+
+    .svc-row {
+      display: grid;
+      grid-template-columns: 3.5rem 1fr 1.5rem;
+      gap: 2rem;
+      align-items: start;
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(240, 236, 228, 0.06);
+      transition: padding-left 0.3s
+    }
+
+    .svc-row:hover {
+      padding-left: 0.5rem
+    }
+
+    .svc-row:hover .svc-arrow {
+      opacity: 1;
+      transform: none
+    }
+
+    .svc-n {
+      font-family: var(--display);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: var(--white3);
+      padding-top: 0.3rem
+    }
+
+    .svc-name {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 300;
+      margin-bottom: 0.7rem;
+      line-height: 1.1
+    }
+
+    .svc-desc {
+      font-size: 0.82rem;
+      color: var(--white3);
+      line-height: 1.85;
+      max-width: 52ch
+    }
+
+    .svc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1.1rem
+    }
+
+    .stag {
+      font-size: 0.56rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(240, 236, 228, 0.08);
+      padding: 0.3rem 0.75rem;
+      color: var(--white3)
+    }
+
+    .svc-arrow {
+      font-size: 1.1rem;
+      color: var(--white3);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s, transform 0.2s;
+      padding-top: 0.4rem
+    }
+
+    /* CLIENTS */
+    .clients {
+      background: var(--black2);
+      border-bottom: 1px solid rgba(240, 236, 228, 0.06);
+      text-align: center
+    }
+
+    .cl-sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      font-weight: 300;
+      color: var(--white3);
+      margin-bottom: 5rem
+    }
+
+    .cl-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(240, 236, 228, 0.06);
+      max-width: 860px;
+      margin: 0 auto
+    }
+
+    .cl-cell {
+      background: var(--black2);
+      padding: 2.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      transition: background 0.2s
+    }
+
+    .cl-cell:hover {
+      background: var(--black3)
+    }
+
+    .cl-ini {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--white);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(240, 236, 228, 0.1)
+    }
+
+    .cl-name {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white3)
+    }
+
+    /* WHY */
+    .why {
+      border-bottom: 1px solid rgba(240, 236, 228, 0.06)
+    }
+
+    .why-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      align-items: end
+    }
+
+    .why-h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.05
+    }
+
+    .why-h2 em {
+      font-style: italic
+    }
+
+    .why-sub {
+      color: var(--white3);
+      font-size: 0.88rem;
+      max-width: 38ch;
+      line-height: 1.8
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(240, 236, 228, 0.06)
+    }
+
+    .wc {
+      background: var(--black);
+      padding: 3rem 2.5rem;
+      border-left: 2px solid transparent;
+      transition: border-color 0.3s, background 0.2s
+    }
+
+    .wc:hover {
+      border-left-color: var(--white);
+      background: var(--black2)
+    }
+
+    .wc-n {
+      font-family: var(--display);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--white3);
+      margin-bottom: 2rem
+    }
+
+    .wc-t {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 300;
+      margin-bottom: 0.8rem;
+      line-height: 1.2
+    }
+
+    .wc-d {
+      font-size: 0.82rem;
+      color: var(--white3);
+      line-height: 1.8
+    }
+
+    /* PROCESS */
+    .process {
+      background: var(--black2);
+      border-bottom: 1px solid rgba(240, 236, 228, 0.06)
+    }
+
+    .proc-head {
+      margin-bottom: 5rem
+    }
+
+    .proc-h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      max-width: 18ch
+    }
+
+    .proc-h2 em {
+      font-style: italic
+    }
+
+    .proc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(240, 236, 228, 0.06)
+    }
+
+    .ps {
+      background: var(--black2);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden
+    }
+
+    .ps::before {
+      content: attr(data-n);
+      position: absolute;
+      bottom: -1.5rem;
+      right: 0.5rem;
+      font-family: var(--display);
+      font-size: 7rem;
+      color: rgba(240, 236, 228, 0.03);
+      line-height: 1;
+      pointer-events: none
+    }
+
+    .ps-n {
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--white3);
+      margin-bottom: 1.5rem
+    }
+
+    .ps-t {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      margin-bottom: 0.8rem;
+      line-height: 1.3
+    }
+
+    .ps-d {
+      font-size: 0.8rem;
+      color: var(--white3);
+      line-height: 1.8
+    }
+
+    /* CTA SECTION */
+    .cta-sec {
+      min-height: 55vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(240, 236, 228, 0.06);
+      padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem)
+    }
+
+    .cta-sec::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(240, 236, 228, 0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(240, 236, 228, 0.012) 1px, transparent 1px);
+      background-size: 60px 60px
+    }
+
+    .cta-star2 {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 3rem;
+      opacity: 0.5;
+      position: relative;
+      z-index: 1
+    }
+
+    .cta-h2 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 7.5rem);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1
+    }
+
+    .cta-h2 em {
+      font-style: italic
+    }
+
+    .cta-body {
+      font-size: 0.9rem;
+      color: var(--white3);
+      max-width: 42ch;
+      margin: 0 auto 2.5rem;
+      line-height: 1.85;
+      position: relative;
+      z-index: 1
+    }
+
+    .cta-list {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 1
+    }
+
+    .cta-list li {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white3);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem
+    }
+
+    .cta-list li::before {
+      content: '✦';
+      font-size: 0.42rem;
+      color: var(--white)
+    }
+
+    .cta-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1
+    }
+
+    /* CONTACT */
+    .contact {
+      border-bottom: 1px solid rgba(240, 236, 228, 0.06)
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: start
+    }
+
+    .ct-h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem
+    }
+
+    .ct-h2 em {
+      font-style: italic
+    }
+
+    .ct-p {
+      font-size: 0.88rem;
+      color: var(--white3);
+      max-width: 32ch;
+      line-height: 1.8;
+      margin-bottom: 2rem
+    }
+
+    .ct-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-top: 2rem
+    }
+
+    .ctd {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      font-size: 0.72rem
+    }
+
+    .ctd-l {
+      color: var(--white3);
+      min-width: 5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.58rem
+    }
+
+    .ctd-v {
+      color: var(--white2)
+    }
+
+    .ct-note {
+      margin-top: 2rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white3);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem
+    }
+
+    .frow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem
+    }
+
+    .ff {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem
+    }
+
+    .ff label {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white3)
+    }
+
+    .ff input,
+    .ff textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(240, 236, 228, 0.1);
+      padding: 0.7rem 0;
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.25s
+    }
+
+    .ff input::placeholder,
+    .ff textarea::placeholder {
+      color: rgba(240, 236, 228, 0.15)
+    }
+
+    .ff input:focus,
+    .ff textarea:focus {
+      border-color: rgba(240, 236, 228, 0.45)
+    }
+
+    .ff textarea {
+      resize: none;
+      min-height: 130px
+    }
+
+    .fsub {
+      background: transparent;
+      border: 1px solid rgba(240, 236, 228, 0.18);
+      color: var(--white);
+      padding: 1rem 2.5rem;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: border-color 0.2s, background 0.2s
+    }
+
+    .fsub:hover {
+      border-color: var(--white);
+      background: rgba(240, 236, 228, 0.04)
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid rgba(240, 236, 228, 0.06)
+    }
+
+    .ft-b {
+      font-family: var(--display);
+      font-size: 0.85rem;
+      letter-spacing: 0.3em;
+      color: var(--white2)
+    }
+
+    .ft-nav {
+      display: flex;
+      gap: 2.5rem
+    }
+
+    .ft-nav a {
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white3);
+      text-decoration: none;
+      transition: color 0.2s
+    }
+
+    .ft-nav a:hover {
+      color: var(--white)
+    }
+
+    .ft-c {
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white3)
+    }
+
+    /* REVEAL */
+    .r {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)
+    }
+
+    .r.v {
+      opacity: 1;
+      transform: none
+    }
+
+    .d1 {
+      transition-delay: 0.1s
+    }
+
+    .d2 {
+      transition-delay: 0.2s
+    }
+
+    .d3 {
+      transition-delay: 0.3s
+    }
+
+    .d4 {
+      transition-delay: 0.4s
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:960px) {
+
+      .manifesto,
+      .founder-grid,
+      .svc-header,
+      .why-head,
+      .why-grid,
+      .proc-grid,
+      .contact-grid {
+        grid-template-columns: 1fr
+      }
+
+      .proc-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .cl-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .frow {
+        grid-template-columns: 1fr
+      }
+
+      .hero-star {
+        right: -3%;
+        opacity: 0.25
+      }
+
+      .hero-col-r {
+        display: none
+      }
+
+      .svc-header {
+        gap: 2rem
+      }
+    }
+
+    @media(max-width:880px) {
+      .nav-links {
+        display: none
+      }
+
+      .nav-brand {
+        font-size: 0.78rem;
+        letter-spacing: 0.22em
+      }
+    }
+
+    @media(max-width:600px) {
+      body {
+        cursor: auto
+      }
+
+      #cur {
+        display: none
+      }
+
+      .proc-grid {
+        grid-template-columns: 1fr
+      }
+
+      .hero-star {
+        display: none
+      }
+
+      .mf-left {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="cur"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-brand" href="#">BUILD IN SILENCE</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#clients">Clients</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+
+    <!-- 4-point star (like in The SORN) -->
+    <div class="hero-star" aria-hidden="true">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" alt="Decorative star icon">
+        <g class="star-g">
+          <path d="M200 8 C197 8 194 80 194 200 C194 200 197 320 200 392 C203 320 206 200 206 200 C206 80 203 8 200 8Z"
+            fill="white" />
+          <path d="M8 200 C8 197 80 194 200 194 C200 194 320 197 392 200 C320 203 200 206 200 206 C80 206 8 203 8 200Z"
+            fill="white" />
+        </g>
+        <circle cx="200" cy="200" r="4" fill="white" opacity="0.4" />
+      </svg>
+    </div>
+
+    <p class="hero-eyebrow">Strategic Business Architecture · Est. 2024</p>
+
+    <h1 class="hero-h1">BUILD IN<br><span class="stroke">SILENCE</span></h1>
+    <p class="hero-tagline-big"><em>Building Empires. Quietly.</em></p>
+
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-desc">We turn raw ideas into scalable business blueprints. Every move is calculated. Every idea
+          is validated. We don't build noise — we build systems.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-w">Get Started ↗</a>
+          <a href="#contact" class="btn-ghost">Book a Strategy Call</a>
+        </div>
+      </div>
+      <div class="hero-col-r">
+        <span>Strategy</span>
+        <span>Blueprint</span>
+        <span>Execution</span>
+        <span>Confidential</span>
+        <span>Elite</span>
+      </div>
+    </div>
+
+    <div class="ticker-bar">
+      <div class="ticker-inner">
+        <span>Strategy</span>&ensp;✦&ensp;<span>Blueprint</span>&ensp;✦&ensp;<span>Execution</span>&ensp;✦&ensp;<b>Silence
+          is
+          Strategy</b>&ensp;✦&ensp;<span>Confidential</span>&ensp;✦&ensp;<span>Elite</span>&ensp;✦&ensp;<span>Validated</span>&ensp;✦&ensp;<span>Scalable</span>&ensp;✦&ensp;<span>Strategy</span>&ensp;✦&ensp;<span>Blueprint</span>&ensp;✦&ensp;<span>Execution</span>&ensp;✦&ensp;<b>Silence
+          is
+          Strategy</b>&ensp;✦&ensp;<span>Confidential</span>&ensp;✦&ensp;<span>Elite</span>&ensp;✦&ensp;<span>Validated</span>&ensp;✦&ensp;<span>Scalable</span>&ensp;✦&ensp;
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <div class="manifesto r">
+    <div class="mf-left">
+      <div>
+        <div class="mf-num">100%</div>
+        <div class="mf-lbl">Confidential</div>
+      </div>
+      <div>
+        <div class="mf-num">3×</div>
+        <div class="mf-lbl">Avg. growth potential</div>
+      </div>
+      <div>
+        <div class="mf-num">NDA</div>
+        <div class="mf-lbl">Every engagement</div>
+      </div>
+    </div>
+    <div>
+      <p class="mf-big r d1"><em>BUILD IN SILENCE</em> is not just a consulting firm.</p>
+      <p class="mf-p r d2">We <strong>architect business ideas</strong> and convert them into structured,
+        execution-ready blueprints designed for scalable growth.</p>
+      <p class="mf-p r d3">Every move is <strong>calculated</strong>. Every idea is <strong>validated</strong>. Every
+        strategy is built for the long game — not the spotlight.</p>
+      <p class="mf-p r d3">We don't build noise. <strong>We build systems.</strong></p>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="founder" id="about">
+    <div class="sl"><i></i> About the Architect</div>
+    <div class="founder-grid">
+      <div class="f-left r">
+        <div class="f-avatar">D</div>
+        <div class="f-name">Dhanush</div>
+        <div class="f-role">Founder &amp; Strategic Architect</div>
+      </div>
+      <div>
+        <h2 class="f-h2 r">The <em>mind</em> behind the blueprint.</h2>
+        <p class="f-p r d1">BUILD IN SILENCE was founded on a singular belief: that the most powerful businesses are
+          built in the quiet — through disciplined thinking, precise strategy, and ruthless execution. Not through
+          noise.</p>
+        <p class="f-p r d2">With a background in business architecture and market strategy, Dhanush has helped founders
+          across industries turn vague ambitions into <strong>structured, fundable, scalable realities</strong>.</p>
+        <p class="f-p r d3">Every engagement is personal. Every blueprint is bespoke. <strong>Your idea deserves more
+            than a template.</strong></p>
+        <div class="f-line"></div>
+        <div class="pills r d3">
+          <span class="pill">Market Validation</span>
+          <span class="pill">Business Architecture</span>
+          <span class="pill">Scaling Strategy</span>
+          <span class="pill">Monetisation</span>
+          <span class="pill">NDA Protected</span>
+          <span class="pill">Elite Positioning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="sl"><i></i> What We Do</div>
+    <div class="svc-header">
+      <h2 class="svc-h2 r">Three pillars. One <em>outcome.</em></h2>
+      <p class="svc-sub r d1">We don't offer generic consulting packages. We engineer bespoke strategic systems for
+        founders who refuse to settle for average.</p>
+    </div>
+    <div class="svc-list">
+      <div class="svc-row r">
+        <div class="svc-n">01</div>
+        <div>
+          <div class="svc-name">Business Idea Development</div>
+          <p class="svc-desc">From raw concept to validated opportunity. We interrogate your idea, stress-test the
+            market, and uncover the clearest path to monetisation. No guesswork — only evidence-backed conviction that
+            gives you the confidence to build.</p>
+          <div class="svc-tags">
+            <span class="stag">Market Validation</span><span class="stag">Opportunity Research</span><span
+              class="stag">Monetisation Strategy</span><span class="stag">Competitive Positioning</span>
+          </div>
+        </div>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-row r d1">
+        <div class="svc-n">02</div>
+        <div>
+          <div class="svc-name">Blueprint Architecture</div>
+          <p class="svc-desc">The blueprint is your business's nervous system. We design revenue structures, execution
+            roadmaps, and scaling frameworks that hold up under pressure — and under investor scrutiny. Built to last.
+            Built to scale.</p>
+          <div class="svc-tags">
+            <span class="stag">Business Model Structuring</span><span class="stag">Revenue Systems</span><span
+              class="stag">Execution Roadmap</span><span class="stag">Scaling Framework</span>
+          </div>
+        </div>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-row r d2">
+        <div class="svc-n">03</div>
+        <div>
+          <div class="svc-name">Personal Branding</div>
+          <p class="svc-desc">The founder is the brand. We craft your public narrative, authority positioning, and
+            digital presence — ensuring the world sees the architect behind the empire. Your name should open doors
+            before you enter the room.</p>
+          <div class="svc-tags">
+            <span class="stag">Founder Narrative</span><span class="stag">Authority Positioning</span><span
+              class="stag">Digital Presence</span><span class="stag">LinkedIn Strategy</span><span class="stag">Content
+              Architecture</span>
+          </div>
+        </div>
+        <div class="svc-arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <section class="clients" id="clients">
+    <div class="sl" style="justify-content:center"><i></i> Clients <i></i></div>
+    <p class="cl-sub r">Trusted by Visionary Brands</p>
+    <div class="cl-grid r d1">
+      <div class="cl-cell">
+        <div class="cl-ini">SC</div>
+        <div class="cl-name">Scaler</div>
+      </div>
+      <div class="cl-cell">
+        <div class="cl-ini">PL</div>
+        <div class="cl-name">Polaris</div>
+      </div>
+      <div class="cl-cell">
+        <div class="cl-ini">MK</div>
+        <div class="cl-name">Matiks</div>
+      </div>
+      <div class="cl-cell">
+        <div class="cl-ini">SA</div>
+        <div class="cl-name">Sahaa</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why" id="why">
+    <div class="sl"><i></i> Why Choose Us</div>
+    <div class="why-head">
+      <h2 class="why-h2 r">The competitive edge for <em>serious</em> founders.</h2>
+      <p class="why-sub r d1">Most consultants give you a deck. We give you a deployment-ready system — built for scale,
+        engineered for longevity.</p>
+    </div>
+    <div class="why-grid">
+      <div class="wc r">
+        <div class="wc-n">01 ──</div>
+        <div class="wc-t">Confidential Approach</div>
+        <p class="wc-d">Your ideas remain protected. We operate with absolute discretion, signed NDAs on every
+          engagement, and a zero-disclosure policy. Your vision never leaves the room.</p>
+      </div>
+      <div class="wc r d1">
+        <div class="wc-n">02 ──</div>
+        <div class="wc-t">Data-Backed Strategy</div>
+        <p class="wc-d">Every decision is validated through market research, competitive intelligence, and proven
+          strategic frameworks — not gut feel. We build on evidence, not assumption.</p>
+      </div>
+      <div class="wc r d2">
+        <div class="wc-n">03 ──</div>
+        <div class="wc-t">Elite-Level Positioning</div>
+        <p class="wc-d">We don't build generic solutions. We craft bespoke, premium strategies for founders with the
+          ambition to lead markets — not follow them.</p>
+      </div>
+      <div class="wc r d3">
+        <div class="wc-n">04 ──</div>
+        <div class="wc-t">Long-Term Vision</div>
+        <p class="wc-d">We focus on sustainable, compounding growth — not vanity metrics or quick wins. Built for scale.
+          Engineered to outlast the noise and outperform the competition.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div class="sl"><i></i> How We Work</div>
+    <div class="proc-head">
+      <h2 class="proc-h2 r">No surprises. <em>Just results.</em></h2>
+    </div>
+    <div class="proc-grid">
+      <div class="ps r" data-n="1">
+        <div class="ps-n">01 — Discovery</div>
+        <div class="ps-t">We listen before we strategise</div>
+        <p class="ps-d">Deep-dive into your business model, ambitions, market, and constraints. Everything begins with
+          understanding the full picture.</p>
+      </div>
+      <div class="ps r d1" data-n="2">
+        <div class="ps-n">02 — Validation</div>
+        <div class="ps-t">Every idea is stress-tested</div>
+        <p class="ps-d">We run your idea through market research, competitive analysis, and financial viability
+          modelling before a single strategy is built.</p>
+      </div>
+      <div class="ps r d2" data-n="3">
+        <div class="ps-n">03 — Blueprint</div>
+        <div class="ps-t">Architecture before execution</div>
+        <p class="ps-d">We build your complete business blueprint — revenue model, go-to-market strategy, scaling
+          levers, and a sequenced execution roadmap.</p>
+      </div>
+      <div class="ps r d3" data-n="4">
+        <div class="ps-n">04 — Deployment</div>
+        <div class="ps-t">Handed over. Ready to build.</div>
+        <p class="ps-d">You receive a fully execution-ready strategic package. We remain available for ongoing advisory
+          as you scale into your market.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <div class="cta-star2 r" aria-hidden="true">
+      <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" alt="Decorative star accent">
+        <path d="M35 2 C33 2 31 25 31 35 C31 45 33 68 35 68 C37 68 39 45 39 35 C39 25 37 2 35 2Z" fill="white" />
+        <path d="M2 35 C2 33 25 31 35 31 C45 31 68 33 68 35 C68 37 45 39 35 39 C25 39 2 37 2 35Z" fill="white" />
+        <circle cx="35" cy="35" r="2.5" fill="white" opacity="0.5" />
+      </svg>
+    </div>
+    <h2 class="cta-h2 r">Build It. But <em>Build It Right.</em></h2>
+    <p class="cta-body r d1">Serious founders only. If you're ready to move from idea to empire — the blueprint starts
+      here.</p>
+    <ul class="cta-list r d2">
+      <li>Serious founders only</li>
+      <li>Confidential consultation</li>
+      <li>Strategic business blueprints</li>
+      <li>Execution-ready frameworks</li>
+    </ul>
+    <div class="cta-btns r d3">
+      <a href="#contact" class="btn-w">Start Your Strategy Session ↗</a>
+      <a href="#contact" class="btn-ghost">Book a Call</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-grid">
+      <div>
+        <div class="sl"><i></i> Get In Touch</div>
+        <h2 class="ct-h2 r"><em>Let's architect</em> your empire.</h2>
+        <p class="ct-p r d1">Every great business begins with a single, well-structured conversation. All submissions
+          are treated with absolute confidentiality.</p>
+        <div class="ct-details r d2">
+          <div class="ctd"><span class="ctd-l">Email</span><span class="ctd-v">dhanush@buildinsilence.in</span></div>
+          <div class="ctd"><span class="ctd-l">Based</span><span class="ctd-v">India — Working Globally</span></div>
+          <div class="ctd"><span class="ctd-l">Response</span><span class="ctd-v">Within 24 hours</span></div>
+        </div>
+        <div class="ct-note r d3">🔒 NDA signed before every engagement</div>
+      </div>
+      <div class="r d1">
+        <div class="form">
+          <div class="frow">
+            <div class="ff"><label for="fn">Full Name *</label><input id="fn" type="text" placeholder="Your name" />
+            </div>
+            <div class="ff"><label for="fe">Email Address *</label><input id="fe" type="email"
+                placeholder="your@email.com" /></div>
+          </div>
+          <div class="ff"><label for="fc">Company / Project Name</label><input id="fc" type="text"
+              placeholder="What are you building?" /></div>
+          <div class="ff"><label for="fi">Tell us about your idea *</label><textarea id="fi"
+              placeholder="Share your vision. The more detail, the better. All information is kept strictly confidential."></textarea>
+          </div>
+          <button class="fsub" onclick="doSend()">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="ft-b">BUILD IN SILENCE</span>
+    <nav class="ft-nav">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#clients">Clients</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <span class="ft-c">© 2025 Build In Silence · All Rights Reserved</span>
+  </footer>
+
+  <script>
+    // Cursor
+    const cur = document.getElementById('cur');
+    document.addEventListener('mousemove', e => {
+      cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a,button,.svc-row,.wc,.cl-cell').forEach(el => {
+      el.addEventListener('mouseenter', () => cur.classList.add('big'));
+      el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+    });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v') });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+    // Form
+    function doSend() {
+      const n = document.getElementById('fn').value.trim();
+      const e = document.getElementById('fe').value.trim();
+      const i = document.getElementById('fi').value.trim();
+      const b = document.querySelector('.fsub');
+      if (!n || !e || !i) {
+        b.textContent = 'Please fill required fields';
+        setTimeout(() => b.textContent = 'Send Message', 2500); return;
+      }
+      b.textContent = 'Message Sent ✦';
+      b.style.background = 'rgba(240,236,228,0.06)'; b.disabled = true;
+    }
+  </script>
 </body>
+
 </html>
