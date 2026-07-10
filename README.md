@@ -1,6 +1,7 @@
 # 🏗️ BUILD IN SILENCE
 
 > *Building Empires. Quietly.*
+> *Based in India · Serving Founders Globally*
 
 A premium business architecture and strategic consulting platform for visionary founders who refuse to settle for average.
 
@@ -148,7 +149,7 @@ Features:
 
 | Channel | Details |
 |---------|---------|
-| **Email** | hello@buildinsilence.co |
+| **Email** | dhanush@buildinsilence.in |
 | **Location** | India — Working Globally |
 | **Response Time** | Within 24 hours |
 | **Engagement** | NDA signed before every project |
@@ -213,7 +214,7 @@ Receive execution-ready strategic package with ongoing advisory support.
 > *"Serious founders only. If you're ready to move from idea to empire — the blueprint starts here."*
 
 Ready to architect your empire? 
-[**Start Your Strategy Session**](mailto:hello@buildinsilence.co)
+[**Start Your Strategy Session**](mailto:dhanush@buildinsilence.in)
 
 ---
 
